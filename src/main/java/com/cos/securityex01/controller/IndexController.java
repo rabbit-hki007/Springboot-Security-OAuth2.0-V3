@@ -1,6 +1,8 @@
 package com.cos.securityex01.controller;
 
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -8,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,7 +29,19 @@ public class IndexController {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@GetMapping({ "", "/" })
-	public String index() {
+	public String index(@AuthenticationPrincipal PrincipalDetails principal, Model model) {
+		
+		//로그 성공시 메인화면에세션 정보(security session Authentication 정보를 mustache로 전달)
+		if (principal != null) {
+	    	System.out.println("PrincipalDetails : " + principal.getUser());
+	    	System.out.println("PrincipalDetails : " + principal.getUser().getUsername());
+	    	Map<String, Object> userInfoData = new HashMap<>();
+	    	userInfoData.put("username", principal.getUser().getUsername());
+	    	userInfoData.put("email", principal.getUser().getEmail());
+	    	model.addAttribute("userInfo", userInfoData);
+	    	
+		}
+		
 		return "index";
 	}
 

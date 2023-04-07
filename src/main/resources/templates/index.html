@@ -6,8 +6,16 @@
 </head>
 <body>
 <h1>인덱스 페이지 입니다</h1>
+{{^userInfo}}
 <h1><a href="/loginForm">로그인</a></h1>
-<h1><a href="/logout">로그아웃</a></h1>
+{{/userInfo}}
+{{#userInfo}}
+	<div class="form-inline">
+	    <h1 class="text-primary">[사용자 이름: {{username}}]</h1>
+	    <h1 class="text-primary">[사용자 메일: {{email}}]</h1>
+	</div>
+	<h1><a href="/logout">[🖱Logout]</a></h1>
+{{/userInfo}}
 <br/><br/>
 <h1>테스트</h1>
 <h1><a href="/test/login">일반 로그인 세션정보 확인</a></h1>
