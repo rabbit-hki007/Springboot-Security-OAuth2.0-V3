@@ -5,8 +5,8 @@ Springboot-Security-OAuth2.0-V3
 - SpringBoot 4.11.0
 - open JDK 11
 - MySql 8.0.17 3307포트
-   root
-   badboy5604
+   ID : root
+   PW : ???
    DataBase security 
    Table user
 - spring security (@Bean으로 설정함)
